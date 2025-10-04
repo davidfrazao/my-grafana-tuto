@@ -1,0 +1,244 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 1,
+  "id": null,
+  "iteration": 1,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "Logs per minute",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
+      "options": { "legend": { "displayMode": "list", "placement": "bottom" }, "tooltip": { "mode": "single" } },
+      "targets": [
+        {
+          "datasource": { "type": "mysql", "uid": "${DS_MARIADB_LOGS}" },
+          "format": "time_series",
+          "rawSql": "SELECT\n  $__timeGroup(ts, '1m') AS time,\n  COUNT(*) AS logs\nFROM mariadb_logs\nWHERE $__timeFilter(ts)\nGROUP BY time\nORDER BY time;",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "type": "stat",
+      "title": "Total logs (time range)",
+      "gridPos": { "h": 8, "w": 6, "x": 12, "y": 0 },
+      "options": { "reduceOptions": { "calcs": ["lastNotNull"], "fields": "" }, "orientation": "auto" },
+      "targets": [
+        {
+          "datasource": { "type": "mysql", "uid": "${DS_MARIADB_LOGS}" },
+          "format": "table",
+          "rawSql": "SELECT COUNT(*) AS total FROM mariadb_logs WHERE $__timeFilter(ts);",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": { "unit": "short" },
+        "overrides": []
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Avg query time by op (ms)",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 8 },
+      "options": { "legend": { "displayMode": "list", "placement": "bottom" }, "tooltip": { "mode": "multi" } },
+      "fieldConfig": { "defaults": { "unit": "ms" }, "overrides": [] },
+      "targets": [
+        {
+          "datasource": { "type": "mysql", "uid": "${DS_MARIADB_LOGS}" },
+          "format": "time_series",
+          "rawSql": "SELECT\n  $__timeGroup(ts, '1m') AS time,\n  op AS metric,\n  AVG(query_time_ms) AS value\nFROM mariadb_logs\nWHERE $__timeFilter(ts)\nGROUP BY time, metric\nORDER BY time;",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "title": "Per-operation summary",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 8 },
+      "options": {
+        "showHeader": true
+      },
+      "targets": [
+        {
+          "datasource": { "type": "mysql", "uid": "${DS_MARIADB_LOGS}" },
+          "format": "table",
+          "rawSql": "SELECT\n  op,\n  COUNT(*)                                   AS total,\n  SUM(CASE WHEN success=0 THEN 1 ELSE 0 END) AS errors,\n  ROUND(100 * SUM(CASE WHEN success=0 THEN 1 ELSE 0 END) / COUNT(*), 2) AS error_pct,\n  AVG(query_time_ms)                         AS avg_ms,\n  MAX(query_time_ms)                         AS max_ms\nFROM mariadb_logs\nWHERE $__timeFilter(ts)\nGROUP BY op\nORDER BY total DESC;",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": [
+          {
+            "matcher": { "id": "byName", "options": "avg_ms" },
+            "properties": [{ "id": "unit", "value": "ms" }]
+          },
+          {
+            "matcher": { "id": "byName", "options": "max_ms" },
+            "properties": [{ "id": "unit", "value": "ms" }]
+          },
+          {
+            "matcher": { "id": "byName", "options": "error_pct" },
+            "properties": [{ "id": "unit", "value": "percent" }]
+          }
+        ]
+      }
+    },
+    {
+      "type": "table",
+      "title": "Latest logs",
+      "gridPos": { "h": 10, "w": 24, "x": 0, "y": 16 },
+      "options": { "showHeader": true },
+      "targets": [
+        {
+          "datasource": { "type": "mysql", "uid": "${DS_MARIADB_LOGS}" },
+          "format": "table",
+          "rawSql": "SELECT\n  ts,\n  user_host,\n  db_name,\n  op,\n  tbl_name,\n  query_time_ms,\n  rows_examined,\n  rows_sent,\n  success,\n  sql_text\nFROM mariadb_logs\nWHERE $__timeFilter(ts)\n  AND (${db:sqlstring} = '' OR db_name = ${db:sqlstring})\n  AND (${op:sqlstring} = '' OR op = ${op:sqlstring})\nORDER BY ts DESC\nLIMIT 200;",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": [
+          {
+            "matcher": { "id": "byName", "options": "query_time_ms" },
+            "properties": [{ "id": "unit", "value": "ms" }]
+          }
+        ]
+      }
+    },
+    {
+      "type": "table",
+      "title": "Errors only",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 26 },
+      "options": { "showHeader": true },
+      "targets": [
+        {
+          "datasource": { "type": "mysql", "uid": "${DS_MARIADB_LOGS}" },
+          "format": "table",
+          "rawSql": "SELECT\n  ts,\n  user_host,\n  db_name,\n  op,\n  tbl_name,\n  query_time_ms,\n  sql_text\nFROM mariadb_logs\nWHERE $__timeFilter(ts)\n  AND success = 0\nORDER BY ts DESC\nLIMIT 200;",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": { "defaults": { "unit": "ms" }, "overrides": [] }
+    },
+    {
+      "type": "table",
+      "title": "Recent slow / failed (threshold)",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 26 },
+      "options": { "showHeader": true },
+      "targets": [
+        {
+          "datasource": { "type": "mysql", "uid": "${DS_MARIADB_LOGS}" },
+          "format": "table",
+          "rawSql": "SELECT\n  ts,\n  user_host,\n  db_name,\n  op,\n  tbl_name,\n  query_time_ms,\n  success,\n  sql_text\nFROM mariadb_logs\nWHERE $__timeFilter(ts)\n  AND (query_time_ms >= ${slow_ms} OR success = 0)\nORDER BY ts DESC\nLIMIT 200;",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": [
+          {
+            "matcher": { "id": "byName", "options": "query_time_ms" },
+            "properties": [{ "id": "unit", "value": "ms" }]
+          }
+        ]
+      }
+    },
+    {
+      "type": "stat",
+      "title": "Error rate (%)",
+      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 34 },
+      "options": { "reduceOptions": { "calcs": ["lastNotNull"], "fields": "" }, "orientation": "auto" },
+      "targets": [
+        {
+          "datasource": { "type": "mysql", "uid": "${DS_MARIADB_LOGS}" },
+          "format": "table",
+          "rawSql": "SELECT\n  ROUND(100 * SUM(CASE WHEN success=0 THEN 1 ELSE 0 END) / NULLIF(COUNT(*),0), 2) AS error_pct\nFROM mariadb_logs\nWHERE $__timeFilter(ts);",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": { "unit": "percent" },
+        "overrides": []
+      }
+    }
+  ],
+  "refresh": "10s",
+  "schemaVersion": 39,
+  "style": "dark",
+  "tags": ["mariadb", "logs", "simulator"],
+  "templating": {
+    "list": [
+      {
+        "name": "db",
+        "type": "query",
+        "hide": 0,
+        "datasource": { "type": "mysql", "uid": "${DS_MARIADB_LOGS}" },
+        "query": "SELECT DISTINCT db_name FROM mariadb_logs ORDER BY 1;",
+        "refresh": 2,
+        "includeAll": true,
+        "multi": false,
+        "current": { "text": "All", "value": "" }
+      },
+      {
+        "name": "op",
+        "type": "query",
+        "hide": 0,
+        "datasource": { "type": "mysql", "uid": "${DS_MARIADB_LOGS}" },
+        "query": "SELECT DISTINCT op FROM mariadb_logs ORDER BY 1;",
+        "refresh": 2,
+        "includeAll": true,
+        "multi": false,
+        "current": { "text": "All", "value": "" }
+      },
+      {
+        "name": "slow_ms",
+        "type": "constant",
+        "label": "Slow threshold (ms)",
+        "hide": 0,
+        "query": "1000",
+        "current": { "text": "1000", "value": "1000" }
+      }
+    ]
+  },
+  "time": { "from": "now-6h", "to": "now" },
+  "timepicker": { "refresh_intervals": ["5s", "10s", "30s", "1m"] },
+  "timezone": "",
+  "title": "MariaDB Logs Overview",
+  "uid": null,
+  "version": 1,
+  "__inputs": [
+    {
+      "name": "DS_MARIADB_LOGS",
+      "label": "MariaDB Logs",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "mysql",
+      "pluginName": "MySQL"
+    }
+  ],
+  "__requires": [
+    { "type": "grafana", "id": "grafana", "name": "Grafana", "version": "9.0.0" },
+    { "type": "panel", "id": "table", "name": "Table", "version": "" },
+    { "type": "panel", "id": "timeseries", "name": "Time series", "version": "" },
+    { "type": "panel", "id": "stat", "name": "Stat", "version": "" },
+    { "type": "datasource", "id": "mysql", "name": "MySQL", "version": "" }
+  ]
+}

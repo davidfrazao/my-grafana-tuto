@@ -1,0 +1,14 @@
+# Small + predictable base
+FROM hashicorp/terraform:1.9
+
+# The official Terraform image is Alpine-based, so apk works.
+# If Hashi changes the base in the future, switch to apt-get accordingly.
+RUN apk add --no-cache curl bash ca-certificates && update-ca-certificates
+
+# Nice defaults
+ENV TF_PLUGIN_CACHE_DIR=/root/.terraform.d/plugin-cache
+WORKDIR /workspace
+
+# Same interactive shell behavior you were using
+ENTRYPOINT ["/bin/sh","-lc"]
+CMD 'mkdir -p "$TF_PLUGIN_CACHE_DIR"; terraform --version; exec /bin/sh'
