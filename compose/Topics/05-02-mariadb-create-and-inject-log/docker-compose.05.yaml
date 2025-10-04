@@ -199,7 +199,7 @@ services:
   
   logsim:
     build:
-      context: ./mariadb-log-sim-injection
+      context: ./docker/mariadb-log-sim-injection
     container_name: mariadb-log-sim-injection
     depends_on:
       mariadb:
@@ -223,7 +223,7 @@ services:
       OUTPUT_LOG: /app/logs/mariadb-sim.log
     volumes:
       # bind mount logs to host for easy tailing
-      - ./logs:/app/logs
+      - ${PWD}/compose/data/fake-logs:/app/logs
     restart: unless-stopped
     networks:
       - grafana_net        

@@ -56,8 +56,8 @@
 # vscode_ubuntu.bat
 
 # dotenv
-*.env
-*.env.*
+# *.env
+# *.env.*
 
 # Logs
 *.log
@@ -71,7 +71,7 @@ __pycache__/
 *.so
 
 # Virtual environments
-.env
+# .env
 .venv
 env/
 venv/
@@ -98,3 +98,16 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
+
+# elasticsearch
+./compose/data/elasticsearch/data/  
+./compose/data/ prometheus/data/
+./compose/data/grafana/data/
+# terraform
+./compose/data/terraforms/.terraform/
+*.tfstate
+*.tfstate.backup
+*.lock.hcl
+.terraform/
+
+
