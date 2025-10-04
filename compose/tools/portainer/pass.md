@@ -1,4 +1,0 @@
-
-```password
-portainer2025#
-```
