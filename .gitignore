@@ -101,8 +101,9 @@ MANIFEST
 
 # elasticsearch
 ./compose/data/elasticsearch/data/
-./compose/data/ prometheus/data/
+./compose/data/prometheus/data/
 ./compose/data/grafana/data/
+
 # terraform
 ./compose/data/terraforms/.terraform/
 *.tfstate
