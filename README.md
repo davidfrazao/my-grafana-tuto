@@ -52,23 +52,6 @@ Originally focused on **time series metrics**, Grafana has evolved into a **full
 
 ---
 
-### 🧩 **Observability Stack Integration**
-
-Grafana is part of the **Grafana Stack**, which includes:
-
-| Component              | Purpose                         |
-| ---------------------- | ------------------------------- |
-| **Grafana**            | Visualization and dashboards.   |
-| **Prometheus / Mimir** | Metrics collection and storage. |
-| **Loki**               | Log aggregation.                |
-| **Tempo**              | Distributed tracing.            |
-| **Pyroscope**          | Continuous profiling.           |
-| **Alloy / Agent**      | Unified telemetry collection.   |
-
-These together form a **modern open observability stack**, similar to what Elastic or Datadog offers.
-
----
-
 ### 🖼️ **Visualization Types**
 
 Grafana supports many panel types:
@@ -105,12 +88,6 @@ Grafana can be deployed in multiple ways:
 * Business KPI dashboards (SQL, CloudWatch, BigQuery)
 * Network, IoT, or DevOps observability
 * SLO / SLA tracking and alerting
-
----
-
-Would you like me to summarize this into a **one-page technical overview** (e.g., for documentation or a presentation)?
-
-
 
 
 ## [02 - Function diagram of data flux as logs](./lessons/02-Function-diagram-of-data-flux-as-logs.md)
