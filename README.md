@@ -1,9 +1,9 @@
-# My-Grafana-tuto
+### My-Grafana-tuto
 Grafana training 
 
 ![Attention](./images/im_progress.png)
 
-# Requirements:
+### Requirements:
 OS:
 - OS : Windows 11
 - PC with 16 Gb RAM
@@ -26,7 +26,7 @@ Vscode:
     - [ms-python.vscode-pylance](https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance)
     - [ms-python.vscode-python-envs](https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-python-envs)
 
-# During 
+### During 
 - 3 to 4 Hours
 
 ### 01 🧭 **What is Grafana**
@@ -38,7 +38,7 @@ Originally focused on **time series metrics**, Grafana has evolved into a **full
 
 ---
 
-### ⚙️ **Core Capabilities**
+#### ⚙️ **Core Capabilities**
 
 | Capability                  | Description                                                                                                                      |
 | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
@@ -52,7 +52,7 @@ Originally focused on **time series metrics**, Grafana has evolved into a **full
 
 ---
 
-### 🖼️ **Visualization Types**
+#### 🖼️ **Visualization Types**
 
 Grafana supports many panel types:
 **Time series, Stat, Gauge, Table, Logs, Heatmap, Geomap, Node graph, Bar chart, Pie chart, Canvas, Trace view, Flame graph**, and more.
@@ -60,7 +60,7 @@ Each panel can visualize real-time or historical data, supporting thresholds, co
 
 ---
 
-### 🧑‍💻 **Deployment Options**
+#### 🧑‍💻 **Deployment Options**
 
 Grafana can be deployed in multiple ways:
 
@@ -71,7 +71,7 @@ Grafana can be deployed in multiple ways:
 
 ---
 
-### 🔒 **Security & Access Control**
+#### 🔒 **Security & Access Control**
 
 * Role-based access (Viewer, Editor, Admin)
 * Folder and dashboard permissions
@@ -80,7 +80,7 @@ Grafana can be deployed in multiple ways:
 
 ---
 
-### 🚀 **Common Use Cases**
+#### 🚀 **Common Use Cases**
 
 * Infrastructure & application monitoring (with Prometheus)
 * Log analysis (with Loki or Elasticsearch)
@@ -90,6 +90,6 @@ Grafana can be deployed in multiple ways:
 * SLO / SLA tracking and alerting
 
 
-## [02 - Function diagram of data flux as logs](./lessons/02-Function-diagram-of-data-flux-as-logs.md)
+### [02 - Function diagram of data flux as logs](./lessons/02-Function-diagram-of-data-flux-as-logs.md)
 
 ![Log-flow](./compose/images/log_flow.png)
