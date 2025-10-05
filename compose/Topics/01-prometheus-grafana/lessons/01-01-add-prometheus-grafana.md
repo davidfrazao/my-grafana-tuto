@@ -1,4 +1,4 @@
-# Add mariadb to this project
+# Add Prometheus + Grafana to this project
 
 
 ## Scruture of the topic 
@@ -27,7 +27,11 @@
 * [ ] Configure the **Grafana datasource** (`datasource.yaml`) to connect to Prometheus.
 * [ ] View container logs using the **VS Code Docker Extension**.
 * [ ] Explore the container file structure and access files via the **VS Code Docker Extension**.
-* [ ] Test communication between **Prometheus** and **Grafana** (from Prometheus to Grafana).
+* [ ] Test communication between **Prometheus** and **Grafana** (from Prometheus to Grafana).+
+* [ ] Grafana: explore interface - metrics: ( Metrics browser  + command line )
+  * [ ] scrape_duration_seconds.
+  * [ ] prometheus*
+  * [ ] up ?
 
 ---
 
@@ -39,7 +43,7 @@ Would you like me to format this as a **README section** (with brief explanation
 We add the Prometheus service into the docker compose file: 
 - Image: quay.io/prometheus/prometheus:*
 - Data location: Docker shared directory
-- Configuration file: ./compose/prometheus/etc/prometheus.yml
+- Configuration file: ./compose/data/prometheus/etc/prometheus.yml
 
 ---
 ### Grafana container
@@ -47,7 +51,7 @@ We add the Prometheus service into the docker compose file:
 We add the Grafana service into the docker compose file: 
 - Image: grafana/grafana:*
 - data location: Docker shared directory
-- Configuration file: ./compose/grafana/etc/provisioning/datasources/datasource.yaml
+- Configuration file: ./compose/data/grafana/etc/provisioning/datasources/datasource.yaml
 - 
 ---
 
@@ -60,11 +64,14 @@ wget -qO- http://grafana:3000
 ```
 
 ### links
-# promtheus
+# Promtheus
 http://127.0.0.1:9090
-# grafana 
+# Prometheus - metrics
+http://127.0.0.1:9090/metrics
+# Grafana 
 http://127.0.0.1:3000
-
+# Grafana - metrics
+http://127.0.0.1:3000/metrics
 
 # start and stop services from docker-compose
 Please see, the file named "99-start-and-stop-services.md" in this directory.

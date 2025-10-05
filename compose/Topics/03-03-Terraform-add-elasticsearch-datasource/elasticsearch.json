@@ -1,0 +1,13 @@
+{
+  "name": "Elasticsearch",
+  "type": "elasticsearch",
+  "url": "http://elasticsearch:9200",
+  "is_default": false,
+  "basic_auth_enabled": false,
+  "json_data": {
+    "database": "",
+    "timeField": "@timestamp",
+    "httpMethod": "POST",
+    "tlsSkipVerify": false
+  }
+}

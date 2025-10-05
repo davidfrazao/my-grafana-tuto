@@ -26,11 +26,3 @@ variable "grafana_service_account_api_key" {
     error_message = "Provide a non-empty Grafana token via environment or tfvars."
   }
 }
-
-# Directory INSIDE the container (mapped from your host path)
-variable "datasources_dir" {
-  description = "Absolute or module-relative path to datasource JSON files"
-  type        = string
-  # If you prefer an absolute path, you can also set: "/workspace/provisioning/datasource"
-  default     = "provisioning/datasources"
-}
