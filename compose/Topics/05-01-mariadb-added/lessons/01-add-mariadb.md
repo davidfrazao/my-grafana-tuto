@@ -26,7 +26,7 @@
 ### Mariadb container
 
 We add the mariadb service into the docker compose file: 
-- Image: mariadb:11.4
+- Image: mariadb:*
 - Mariadb data location: volume
 - The entrypoint script: docker-entrypoint-initdb.d
 - Create the user and permission
@@ -46,7 +46,7 @@ We add the phpmyadmin service into the docker compose file:
 ---
 ### mariadb mysqld_exporter 
 We add the mysqld_exporter service into the docker compose file: 
-- Image: prom/mysqld-exporter:v0.15.1
+- Image: prom/mysqld-exporter:*
 - Data location: ${PWD}/compose/data/mysqld-exporter
 - Configuration: file (.my.cnf) in the Data location.
 
