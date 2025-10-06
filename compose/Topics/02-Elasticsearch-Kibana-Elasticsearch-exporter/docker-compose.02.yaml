@@ -80,18 +80,18 @@ services:
       image: quay.io/prometheuscommunity/elasticsearch-exporter:latest
       container_name: elasticsearch_exporter
       user: root
-      volumes:
-        - ${PWD}/compose/data/elasticsearch_exporter:/elasticsearch_exporter
-      # command: 
-      #   - '--es.uri=http://elasticsearch:9200'     # change if needed
-      #   - '--es.indices'
-      #   - '--es.all'
-      #   - '--es.indices_mappings'
-      #   - '--es.aliases'
-      #   - '--es.shards'
-      #   - '--es.indices_settings'
-      #   - '--es.timeout=10s'
-      #   - '--web.listen-address=:9114'
+      # volumes:
+      #   - ${PWD}/compose/data/elasticsearch_exporter:/elasticsearch_exporter
+      command: 
+        - '--es.uri=http://elasticsearch:9200'     # change if needed
+        - '--es.indices'
+        - '--es.all'
+        - '--es.indices_mappings'
+        - '--es.aliases'
+        - '--es.shards'
+        - '--es.indices_settings'
+        - '--es.timeout=10s'
+        - '--web.listen-address=:9114'
 
       restart: always
       ports:

@@ -32,7 +32,10 @@
   * [ ] Get the ID from https://grafana.com/grafana/dashboards/14191-elasticsearch-overview/ ( datasource as Prometheus)
   * [ ] On Grafana add manually the dashboad : Dashboard -> choose location -> click ( New ) -> import -> add ID -> Select a Prometheus data source.
   * [ ] From the new dashboard: Edit -> Setting -> JSON Model -> copy the content to ./compose/data/terraform/provisioning/dashboards/Group_01/elastic.json
-  * [ ] Attach shell to **Terraform** service 
+  * [ ] Attach shell to **Terraform** service
+* [ ] Configure the Elasticsearch exporter
+  * [ ] Use a file with the parameters
+  * [ ] Parameters from Elasticsearch exporter define in docker compose filr  
  
         ```
         terraform plan                 # preview changes

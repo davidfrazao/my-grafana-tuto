@@ -26,8 +26,6 @@
 * [ ] check the **Terraform** service — is running.
 * [ ] Access the **Terraform** service — view logs - Vscode extention Vscode.
 
-
-
 ---
 
 Would you like me to format this as a **README section** (with brief explanations under each step)?
