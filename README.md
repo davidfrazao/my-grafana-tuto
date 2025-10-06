@@ -129,6 +129,6 @@ Grafana can be deployed in multiple ways:
 * SLO / SLA tracking and alerting
 
 
-### [02 - Function diagram of data flux as logs](./lessons/02-Function-diagram-of-data-flux-as-logs.md)
+### [02 - Function diagram of data flux as logs](./Function-diagram-of-data-flux-as-logs.md)
 
 ![Log-flow](./compose/images/log_flow.png)
