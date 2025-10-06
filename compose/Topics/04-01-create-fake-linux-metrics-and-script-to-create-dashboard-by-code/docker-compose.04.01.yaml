@@ -139,7 +139,7 @@ services:
   # Static replay of node_exporter metrics without quay.io
   fake-metrics:
     build:
-      context: ./dockerfake-metrics
+      context: ./fake-metrics
     container_name: fake-metrics
     restart: unless-stopped
     ports:

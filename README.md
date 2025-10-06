@@ -1,33 +1,72 @@
 ### My-Grafana-tuto
 Grafana training 
 
-![Attention](./images/im_progress.png)
+![Attention](./compose/images/im_progress.png)
 
+### During 
+- 3 to 4 Hours
+  
 ### Requirements:
 OS:
 - OS : Windows 11
 - PC with 16 Gb RAM
-- WSL Ubuntu
+
+### Please Install 
+- WSL Ubuntu (ubuntu 24.04 )
+  
+- Update packages
+  ```
+  sudo apt update
+  sudo apt upgrade -y
+  ```
 - Docker in WSL - install
-- Docker compose - install
+  ```
+  sudo apt install docker-ce
+  ```
+- Docker in WSL - verify
+  ```
+  sudo systemctl status docker
+  or
+  docker --version
+  or 
+  docker version
+  ```
+
+- Docker compose - install 
+  ```
+  sudo apt install docker-compose
+  ```
+  - After that install:
+        Use docker compose up (✅ new plugin)
+
+- Docker compose - Verify 
+  ```
+  docker-compose --version
+  or 
+  docker compose version # new plugin
+  ```
+
 
 Vscode:
-- extentions:
-    - [pomdtr.excalidraw-editor](https://marketplace.visualstudio.com/items?itemName=pomdtr.excalidraw-editor)
 
-    - [ms-azuretools.vscode-containers](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker)
-    - [ms-vscode-remote.remote-wsl](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl)
-    - [ms-azuretools.vscode-docker](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker)
-    - [johnpapa.vscode-peacock](https://marketplace.visualstudio.com/items?itemName=johnpapa.vscode-peacock)
-    - [rajratnamaitry.open-folder-in-new-vscode](https://marketplace.visualstudio.com/items?itemName=rajratnamaitry.open-folder-in-new-vscode)
+- Extentions: Importantes
+    - [ms-vscode-containers](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker)
+    - [ms-vscode-remote-wsl](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl)
+    - [ms-vscode-excalidraw-editor](https://marketplace.visualstudio.com/items?itemName=pomdtr.excalidraw-editor)
+    - [ms-vscode-open-folder-in-new-vscode](https://marketplace.visualstudio.com/items?itemName=rajratnamaitry.open-folder-in-new-vscode)
+    - [ms-vscode-code-runner](https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner)
+
+- Extention: Extra
+    - [vscode-peacock](https://marketplace.visualstudio.com/items?itemName=johnpapa.vscode-peacock)
     - [HashiCorp.terraform](https://marketplace.visualstudio.com/items?itemName=HashiCorp.terraform)
+ 
+- Extention: Python
     - [ms-python.python](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
     - [ms-python.debugpy](https://marketplace.visualstudio.com/items?itemName=ms-python.debugpy)
     - [ms-python.vscode-pylance](https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance)
     - [ms-python.vscode-python-envs](https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-python-envs)
 
-### During 
-- 3 to 4 Hours
+
 
 ### 01 🧭 **What is Grafana**
 

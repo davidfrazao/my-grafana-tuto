@@ -22,43 +22,18 @@ uv init <project-name>
 
 
 ```bash
-uv venv --python 3.11 .venv
+uv venv --python 3.13 .venv
 ```
 
-* `--python 3.11` → tells `uv` which interpreter version to use.
+* `--python 3.13` → tells `uv` which interpreter version to use.
 * `.venv` → creates the virtual environment in the folder `.venv`.
 
 ### 3. add librarie
 
  ```bash
-  uv add pandas openpyxl
+  uv add pandas openpyxl pathlib
   ```
 
-### Example: add several libraries at once
-
-```bash
-uv add requests flask fastapi
-```
-
-That will:
-
-* Install all three (`requests`, `flask`, `fastapi`) into your environment.
-* Update your `pyproject.toml` and `uv.lock` accordingly (if you’re in a project).
-
----
-
-### Adding with version constraints
-
-```bash
-uv add "requests==2.32.3" "flask>=3.0,<4.0" fastapi
-```
-
----
-
-### Adding dev dependencies
-
-```bash
-uv add --dev black pytest mypy
 ```
 
 ### 4. Activate the environment

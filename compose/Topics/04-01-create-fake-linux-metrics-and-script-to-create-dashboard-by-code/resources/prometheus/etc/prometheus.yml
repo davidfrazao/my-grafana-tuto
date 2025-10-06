@@ -1,0 +1,44 @@
+# my config
+global:
+  scrape_interval: 15s        # Scrape every 15 seconds
+                              # How often Prometheus scrapes (collects) metrics from all configured targets.
+  
+  scrape_timeout: 10s         # Timeout if the target doesn’t reply within 10 seconds
+                              # Maximum time Prometheus will wait for a target to respond before marking the scrape as failed.
+
+  evaluation_interval: 15s    # Evaluate rules every 15 seconds
+                              # How often Prometheus evaluates rules, such as alerting and recording rules.
+
+############################# Alerting #############################
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets: []
+    scheme: http
+    timeout: 10s
+    api_version: v2
+
+########################## Scrape Configs ##########################
+scrape_configs:
+
+#************************* Scrape: Prometheus *********************#
+  - job_name: prometheus
+    honor_timestamps: true
+    scrape_interval: 15s
+    scrape_timeout: 10s
+    metrics_path: /metrics
+    scheme: http
+    static_configs:
+    - targets:
+      - localhost:9090
+
+#******************* Scrape: Elasticsearch Exporter ****************#
+  - job_name: elasticsearch_exporter
+    honor_timestamps: true
+    scrape_interval: 15s
+    scrape_timeout: 10s
+    metrics_path: /metrics
+    scheme: http
+    static_configs:
+    - targets:
+      - elasticsearch_exporter:9114

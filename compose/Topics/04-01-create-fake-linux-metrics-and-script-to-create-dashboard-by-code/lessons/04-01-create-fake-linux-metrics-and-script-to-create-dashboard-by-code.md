@@ -21,24 +21,8 @@
 
 ### 🧩 Environment Setup & Verification Checklist
 
-* [ ] copy resource and and delete dashboard.
-* [ ] Start the stack using **Docker Compose** from the **VS Code Docker Extension**.
-* [ ] Check the docker-compose.03.02.yaml
-* [ ] Check the **Terraform** service — is running.
-* [ ] Access the **Terraform** service — view logs - Vscode extention Vscode.
-* [ ] Attach shell to **Terraform** service and do "curl -fsS http://grafana:3000/api/health && echo" to check Grafana
-* [ ] Create token in Grafana to be used by Terraform. [Go-to] Chapter: Create-a-Grafana-token
-* [ ] Create a new dashboard for Elasticsearch.
-  * [ ] Get the ID from https://grafana.com/grafana/dashboards/14191-elasticsearch-overview/ ( datasource as Prometheus)
-  * [ ] On Grafana add manually the dashboad : Dashboard -> choose location -> click ( New ) -> import -> add ID -> Select a Prometheus data source.
-  * [ ] From the new dashboard: Edit -> Setting -> JSON Model -> copy the content to ./compose/data/terraform/provisioning/dashboards/Group_01/elastic.json
-  * [ ] Attach shell to **Terraform** service 
- 
-        ```
-        terraform plan                 # preview changes
-        terraform apply                # apply (interactive approval)
-        ```
-  * [ ] check dashboard -> [Grafana](http://127.0.0.1:3000)
+* [ ] copy resource and and delete datasource.
+
 ---
 
 Would you like me to format this as a **README section** (with brief explanations under each step)?
@@ -93,41 +77,7 @@ We add the Grafana service into the docker compose file:
 - Configuration file: ./compose/data/terraform + ./compose/data/.terraform-data
 ---
 
-### Create-a-Grafana-token
 
-- In Grafana: **Administration → Users and access → Service accounts → New service account → New token**. Give it at least **Admin** on the target org/workspace (or the specific alerting/Datasource perms you need). Save the token string. ([Grafana Labs][1])
-
-#### Grafana: (Manual)
-
-Create the token and save the token in .env file with the variable mamed "GRAFANA_TOKEN".
-
-<img src="../../../images/grafana-token.png" alt="Architecture" width="750"/>
-
-Get the token
-
-<img src="../../../images/grafana-token-creation.png" alt="Architecture" width="750"/>
-
----
-
-### download dashboard id
-
-Dashboard: https://grafana.com/grafana/dashboards/878-elasticsearch-dashboard/ 
-
-Click on "Download JSON" and copy this file to ./compose/data/terraform/dashboard/Group_01/
-With the name "Elasticsearch.json"
-
-
-### Create dashboard groups 
-
-Attach shell **Terraform**
-
-```
-cd /workspace
-terraform init                 # downloads providers, sets up backend 
-terraform validate             # syntax & basic config checks
-terraform plan                 # preview changes
-terraform apply                # apply (interactive approval)
-```
 
 ### links
 # Promtheus
