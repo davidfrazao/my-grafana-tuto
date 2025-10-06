@@ -96,23 +96,22 @@ We add the Grafana service into the docker compose file:
 
 
 ### links
-# Promtheus
+### Promtheus
 http://127.0.0.1:9090
-# Prometheus - metrics
+### Prometheus - metrics
 http://127.0.0.1:9090/metrics
-# Grafana 
+### Grafana 
 http://127.0.0.1:3000
-# Grafana - metrics
+### Grafana - metrics
 http://127.0.0.1:3000/metrics
-# kibana
+### kibana
 http://127.0.0.1:8888
-# Elastiscearch 
+### Elastiscearch 
 http://127.0.0.1:8881
-# Elasticsearch exporter
+### Elasticsearch exporter
 http://127.0.0.1:9114
-# Elasticsearch exporter
+### Elasticsearch exporter
 http://127.0.0.1:9114/metrics
-
 
 # start and stop services from docker-compose
 Please see, the file named "99-start-and-stop-services.md" in this directory.
