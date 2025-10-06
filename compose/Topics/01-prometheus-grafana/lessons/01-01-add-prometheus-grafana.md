@@ -32,6 +32,7 @@
   * [ ] scrape_duration_seconds.
   * [ ] prometheus*
   * [ ] up ?
+  * [ ] add scraping to Prometheus 
 
 ---
 

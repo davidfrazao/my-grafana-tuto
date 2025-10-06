@@ -28,7 +28,7 @@
 * [ ] Access the **Terraform** service — view logs - Vscode extention Vscode.
 * [ ] Attach shell to **Terraform** service and do "curl -fsS http://grafana:3000/api/health && echo" to check Grafana
 * [ ] Create a Elasticsearch datasource by code with Terraform.
-  * [] 
+  * [ ] Copy the content  
   * [ ] On Grafana add manually the dashboad : Dashboard -> choose location -> click ( New ) -> import -> add ID -> Select a Prometheus data source.
   * [ ] From the new dashboard: Edit -> Setting -> JSON Model -> copy the content to ./compose/data/terraform/provisioning/dashboards/Group_01/elastic.json
   * [ ] Attach shell to **Terraform** service 
