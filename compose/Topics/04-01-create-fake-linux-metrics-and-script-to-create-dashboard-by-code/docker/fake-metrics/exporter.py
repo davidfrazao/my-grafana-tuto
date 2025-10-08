@@ -33,6 +33,18 @@ net_tx = Counter("node_network_transmit_bytes_total",
 cpu = Counter("node_cpu_seconds_total",
               "Total seconds CPU spent in each mode.", ["cpu", "mode"])
 
+# ---- New: High-variation app metrics (5 names) ----
+app_variation = Gauge(
+    "app_variation_value",
+    "Rapidly changing application value (demo).",
+    ["name"]
+)
+app_event_total = Counter(
+    "app_event_total",
+    "Bursty application events (demo).",
+    ["name"]
+)
+
 def updater():
     # Memory starting point
     mem = int(TOTAL_MEM * 0.60)
@@ -51,6 +63,9 @@ def updater():
     }
 
     l1, l5, l15 = 0.20, 0.15, 0.10
+
+    # New: fixed label set (5 names)
+    names = ["alpha", "bravo", "charlie", "delta", "echo"]
 
     while True:
         # ---- Memory ----
@@ -85,13 +100,24 @@ def updater():
         for i in range(2):
             cpu.labels(str(i), "user").inc(random.uniform(0.1, 0.8))
             cpu.labels(str(i), "system").inc(random.uniform(0.05, 0.4))
-            cpu.labels(str(i), "idle").inc(random.uniform(4.0, 5.0))
+            cpu.labels(str(i), "idle").inc(random.uniform(1.0, 5.0))
             cpu.labels(str(i), "iowait").inc(random.uniform(0.0, 0.05))
 
         # ---- Network cumulative counters ----
         for dev in ["eth0", "lo"]:
             net_rx.labels(dev).inc(random.randint(10_000, 200_000))
             net_tx.labels(dev).inc(random.randint(5_000, 150_000))
+
+        # ---- New: High-variation metrics (5 names) ----
+        for n in names:
+            # Gauge: big swings + occasional large jump
+            base = random.uniform(-100.0, 100.0)
+            jump = random.choice([0, 0, 0, random.uniform(-500, 500)])  # ~25% chance large jump
+            app_variation.labels(n).set(base + jump)
+
+            # Counter: bursty increments (including possible zeros)
+            burst = random.choice([0, 0, random.randint(1, 50), random.randint(100, 2000)])
+            app_event_total.labels(n).inc(burst)
 
         time.sleep(5)
 
@@ -100,4 +126,3 @@ if __name__ == "__main__":
     threading.Thread(target=updater, daemon=True).start()
     while True:
         time.sleep(60)
-

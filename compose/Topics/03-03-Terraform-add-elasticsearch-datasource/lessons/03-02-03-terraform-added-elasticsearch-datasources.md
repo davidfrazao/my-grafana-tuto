@@ -21,23 +21,20 @@
 
 ### 🧩 Environment Setup & Verification Checklist
 
-* [ ] copy resources and  delete datasources if needed ( contain datasource configuration )
-* [ ] Start the stack using **Docker Compose** from the **VS Code Docker Extension**.
+* [ ] copy resources and delete datasources if needed ( contain datasource configuration )
 * [ ] Check the docker-compose.03.03.yaml
+* [ ] Start the stack using **Docker Compose** from the **VS Code Docker Extension**.
 * [ ] Check the **Terraform** service — is running.
 * [ ] Access the **Terraform** service — view logs - Vscode extention Vscode.
 * [ ] Attach shell to **Terraform** service and do "curl -fsS http://grafana:3000/api/health && echo" to check Grafana
 * [ ] Create a Elasticsearch datasource by code with Terraform.
-  * [ ] Copy the content  
-  * [ ] On Grafana add manually the dashboad : Dashboard -> choose location -> click ( New ) -> import -> add ID -> Select a Prometheus data source.
-  * [ ] From the new dashboard: Edit -> Setting -> JSON Model -> copy the content to ./compose/data/terraform/provisioning/dashboards/Group_01/elastic.json
+  * [ ] Copy the content from resources
   * [ ] Attach shell to **Terraform** service 
-
         ```
         terraform plan                 # preview changes
         terraform apply                # apply (interactive approval)
         ```
-  * [ ] check dashboard -> [Grafana](http://127.0.0.1:3000)
+  * [ ] check dashboard -> [Grafana](http://127.0.0.1:3000) - Datasource
 
 ---
 
@@ -64,29 +61,29 @@ We add the Grafana service into the docker compose file:
 
 ### Elasticsearch container
 
-We add the Grafana service into the docker compose file: 
+We add the Elasticsearch service into the docker compose file: 
 - Image: ocker.elastic.co/elasticsearch/elasticsearch:*
 - data location: ./compose/data/elasticsearch/data
 ---
 
 ### Kibana container
 
-We add the Grafana service into the docker compose file: 
-- Image: grafana/grafana:*
+We add the Kibana service into the docker compose file: 
+- Image: docker.elastic.co/kibana/kibana:*
 - data location: Container’s Writable Layer (Internal)
 ---
 
 ### Elasticsearch exporter container
 
-We add the Grafana service into the docker compose file: 
-- Image: grafana/grafana:*
+We add the Elasticsearch exporter service into the docker compose file: 
+- Image: quay.io/prometheuscommunity/elasticsearch-exporter:*
 - data location: Docker shared directory
-- Configuration file: ./compose/data/elasticsearch_exporter/elasticsearch_exporter.yml
+- Configuration file: ./compose/data/elasticsearch_exporter/elasticsearch_exporter.yml or docker compose file
 ---
 
 ### Terraform container
 
-We add the Grafana service into the docker compose file: 
+We add the Terraform service into the docker compose file: 
 - Image: hashicorp/terraform:1.13.3:*
 - dockerfile: ./docker/terraform/Dockerfile.terraform
 - data location: Docker shared directory

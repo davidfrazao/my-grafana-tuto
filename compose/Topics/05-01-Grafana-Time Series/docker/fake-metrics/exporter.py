@@ -1,8 +1,9 @@
 import os, random, time, threading
-from prometheus_client import start_http_server, Gauge, Counter
+from prometheus_client import start_http_server, Gauge, Counter, Enum
 
 # ---- Config ----
 TOTAL_MEM = int(os.getenv("FAKE_TOTAL_MEM_BYTES", str(8 * 1024**3)))  # default 8 GiB
+STATUS_TICK = float(os.getenv("STATUS_TICK", "5"))  # main loop sleep
 
 # ---- Metrics (node-like) ----
 # Memory
@@ -33,12 +34,38 @@ net_tx = Counter("node_network_transmit_bytes_total",
 cpu = Counter("node_cpu_seconds_total",
               "Total seconds CPU spent in each mode.", ["cpu", "mode"])
 
+# ---- High-variation app metrics (5 names) ----
+app_variation = Gauge(
+    "app_variation_value",
+    "Rapidly changing application value (demo).",
+    ["name"]
+)
+app_event_total = Counter(
+    "app_event_total",
+    "Bursty application events (demo).",
+    ["name"]
+)
+
+# ---- NEW: Discrete severity metrics (random variation) ----
+# Enum exposes one series per state with value 1 for the active state.
+severity = Enum(
+    "app_severity",
+    "Discrete severity level for a service.",
+    states=["LOW", "NORMAL", "HIGH", "CRITICAL"],
+    labelnames=["name"]
+)
+# Numeric companion for easy thresholds: 0=LOW, 1=NORMAL, 2=HIGH, 3=CRITICAL
+severity_level = Gauge(
+    "app_severity_level",
+    "Numeric severity level: 0=LOW,1=NORMAL,2=HIGH,3=CRITICAL.",
+    ["name"]
+)
+
 def updater():
     # Memory starting point
     mem = int(TOTAL_MEM * 0.60)
 
     # Filesystem models (base sizes/free)
-    # tweak these numbers or add more tuples to simulate additional mounts
     filesystems = {
         ("/dev/sda1", "ext4", "/"): {
             "size": 100_000_000_000,  # 100 GB
@@ -51,6 +78,14 @@ def updater():
     }
 
     l1, l5, l15 = 0.20, 0.15, 0.10
+
+    # Fixed label set (5 names)
+    names = ["alpha", "bravo", "charlie", "delta", "echo"]
+
+    # Init severity with a sane start
+    for n in names:
+        severity.labels(n).state("NORMAL")
+        severity_level.labels(n).set(1)
 
     while True:
         # ---- Memory ----
@@ -93,11 +128,35 @@ def updater():
             net_rx.labels(dev).inc(random.randint(10_000, 200_000))
             net_tx.labels(dev).inc(random.randint(5_000, 150_000))
 
-        time.sleep(5)
+        # ---- High-variation metrics (5 names) ----
+        for n in names:
+            # Gauge: big swings + occasional large jump
+            base = random.uniform(-100.0, 100.0)
+            jump = random.choice([0, 0, 0, random.uniform(-500, 500)])  # ~25% chance large jump
+            app_variation.labels(n).set(base + jump)
+
+            # Counter: bursty increments (including possible zeros)
+            burst = random.choice([0, 0, random.randint(1, 50), random.randint(100, 2000)])
+            app_event_total.labels(n).inc(burst)
+
+        # ---- NEW: Random severity changes ----
+        # Weighted picks per tick; tweak weights to get more/less volatility.
+        # Example bias: mostly NORMAL, sometimes HIGH, rarely CRITICAL/LOW.
+        choices = ["LOW", "NORMAL", "HIGH", "CRITICAL"]
+        weights = [10, 65, 18, 7]  # sum arbitrary; distribution controls randomness
+        level_map = {"LOW": 0, "NORMAL": 1, "HIGH": 2, "CRITICAL": 3}
+
+        for n in names:
+            if random.random() < 0.45:  # 45% chance to change this tick (make it "shooty")
+                new_state = random.choices(choices, weights=weights, k=1)[0]
+                severity.labels(n).state(new_state)
+                severity_level.labels(n).set(level_map[new_state])
+            # else keep previous state for continuity
+
+        time.sleep(STATUS_TICK)
 
 if __name__ == "__main__":
     start_http_server(8000)  # /metrics
     threading.Thread(target=updater, daemon=True).start()
     while True:
         time.sleep(60)
-

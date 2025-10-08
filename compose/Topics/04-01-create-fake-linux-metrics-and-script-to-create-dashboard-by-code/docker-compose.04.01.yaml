@@ -102,7 +102,7 @@ services:
   terraform:
       build:
         context: .
-        dockerfile: Dockerfile.terraform
+        dockerfile: ./docker/terraform/Dockerfile.terraform
       image: local/terraform:with-curl
       container_name: terraform
       working_dir: /workspace
@@ -139,7 +139,7 @@ services:
   # Static replay of node_exporter metrics without quay.io
   fake-metrics:
     build:
-      context: ./fake-metrics
+      context: ./docker/fake-metrics
     container_name: fake-metrics
     restart: unless-stopped
     ports:

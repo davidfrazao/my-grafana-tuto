@@ -33,15 +33,14 @@
   * [ ] On Grafana add manually the dashboad : Dashboard -> choose location -> click ( New ) -> import -> add ID -> Select a Prometheus data source.
   * [ ] From the new dashboard: Edit -> Setting -> JSON Model -> copy the content to ./compose/data/terraform/provisioning/dashboards/Group_01/elastic.json
   * [ ] Attach shell to **Terraform** service
-* [ ] Configure the Elasticsearch exporter
-  * [ ] Use a file with the parameters
-  * [ ] Parameters from Elasticsearch exporter define in docker compose filr  
- 
-        ```
+          ```
         terraform plan                 # preview changes
         terraform apply                # apply (interactive approval)
         ```
   * [ ] check dashboard -> [Grafana](http://127.0.0.1:3000)
+* [ ] Configure the Elasticsearch exporter
+  * [ ] Use a file with the parameters
+  * [ ] Parameters from Elasticsearch exporter define in docker compose fil
 ---
 
 Would you like me to format this as a **README section** (with brief explanations under each step)?
@@ -67,34 +66,35 @@ We add the Grafana service into the docker compose file:
 
 ### Elasticsearch container
 
-We add the Grafana service into the docker compose file: 
+We add the Elasticsearch service into the docker compose file: 
 - Image: ocker.elastic.co/elasticsearch/elasticsearch:*
 - data location: ./compose/data/elasticsearch/data
 ---
 
 ### Kibana container
 
-We add the Grafana service into the docker compose file: 
-- Image: grafana/grafana:*
+We add the Kibana service into the docker compose file: 
+- Image: docker.elastic.co/kibana/kibana:*
 - data location: Container’s Writable Layer (Internal)
 ---
 
 ### Elasticsearch exporter container
 
-We add the Grafana service into the docker compose file: 
-- Image: grafana/grafana:*
+We add the Elasticsearch exporter service into the docker compose file: 
+- Image: quay.io/prometheuscommunity/elasticsearch-exporter:*
 - data location: Docker shared directory
-- Configuration file: ./compose/data/elasticsearch_exporter/elasticsearch_exporter.yml
+- Configuration file: ./compose/data/elasticsearch_exporter/elasticsearch_exporter.yml or docker compose file
 ---
 
 ### Terraform container
 
-We add the Grafana service into the docker compose file: 
+We add the Terraform service into the docker compose file: 
 - Image: hashicorp/terraform:1.13.3:*
 - dockerfile: ./docker/terraform/Dockerfile.terraform
 - data location: Docker shared directory
 - Configuration file: ./compose/data/terraform + ./compose/data/.terraform-data
 ---
+
 
 ### Create-a-Grafana-token
 

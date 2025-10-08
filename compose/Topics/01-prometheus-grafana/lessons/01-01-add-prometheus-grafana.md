@@ -47,6 +47,7 @@ We add the Prometheus service into the docker compose file:
 - Configuration file: ./compose/data/prometheus/etc/prometheus.yml
 
 ---
+
 ### Grafana container
 
 We add the Grafana service into the docker compose file: 
@@ -54,6 +55,20 @@ We add the Grafana service into the docker compose file:
 - data location: Docker shared directory
 - Configuration file: ./compose/data/grafana/etc/provisioning/datasources/datasource.yaml
 - 
+---
+
+### Elasticsearch container
+
+We add the Elasticsearch service into the docker compose file: 
+- Image: ocker.elastic.co/elasticsearch/elasticsearch:*
+- data location: ./compose/data/elasticsearch/data
+---
+
+### Kibana container
+
+We add the Kibana service into the docker compose file: 
+- Image: docker.elastic.co/kibana/kibana:*
+- data location: Container’s Writable Layer (Internal)
 ---
 
 ### Test communication btw prometheus to grafana

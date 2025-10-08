@@ -21,7 +21,28 @@
 
 ### 🧩 Environment Setup & Verification Checklist
 
-* [ ] copy resource and and delete datasource.
+* [ ] copy resource.
+* [ ] Check the docker-compose.04.01.yaml
+* [ ] Start the stack using **Docker Compose** from the **VS Code Docker Extension**.
+* [ ] Access the **fake metrics** service — open [http://127.0.0.1:9500/metrics](http://127.0.0.1:9500/metrics) *(Ctrl + Click)*.
+* [ ] Attach shell to **Prometheus** service - (wget -O -  http://fake-metrics:8000/metrics).
+* [ ] add the configuration of the fake metrics to promtheus
+* [ ] go to Grafana - explore - datasoure prometheus - search metrics 
+* [ ] from the directory "python-script" (click on the right button of the mousse + open folder in new windows)
+* [ ] create .venv directory (python virtual env)
+* [ ] delete file ./output/dashboard_from_excel_template.json
+* [ ] update excel file 
+* [ ] Pyhton: select interpreter
+* [ ] run python 
+* [ ] copy ./output/dashboard_from_excel_template.json to ./compose/data/terraform/provisioning/Group_01/dashboard_from_excel_template.json
+* [ ] Check the **Terraform** service — is running.
+* [ ] Access the **Terraform** service — view logs - Vscode extention Vscode.
+* [ ] Attach shell to **Terraform** service
+  * [ ] devolp the dashboard in Grafana with the help of Terraform 
+         ```
+        terraform plan                 # preview changes
+        terraform apply                # apply (interactive approval)
+        ```
 
 ---
 
@@ -48,35 +69,40 @@ We add the Grafana service into the docker compose file:
 
 ### Elasticsearch container
 
-We add the Grafana service into the docker compose file: 
+We add the Elasticsearch service into the docker compose file: 
 - Image: ocker.elastic.co/elasticsearch/elasticsearch:*
 - data location: ./compose/data/elasticsearch/data
 ---
 
 ### Kibana container
 
-We add the Grafana service into the docker compose file: 
-- Image: grafana/grafana:*
+We add the Kibana service into the docker compose file: 
+- Image: docker.elastic.co/kibana/kibana:*
 - data location: Container’s Writable Layer (Internal)
 ---
 
 ### Elasticsearch exporter container
 
-We add the Grafana service into the docker compose file: 
-- Image: grafana/grafana:*
+We add the Elasticsearch exporter service into the docker compose file: 
+- Image: quay.io/prometheuscommunity/elasticsearch-exporter:*
 - data location: Docker shared directory
-- Configuration file: ./compose/data/elasticsearch_exporter/elasticsearch_exporter.yml
+- Configuration file: ./compose/data/elasticsearch_exporter/elasticsearch_exporter.yml or docker compose file
 ---
 
 ### Terraform container
 
-We add the Grafana service into the docker compose file: 
+We add the Terraform service into the docker compose file: 
 - Image: hashicorp/terraform:1.13.3:*
 - dockerfile: ./docker/terraform/Dockerfile.terraform
 - data location: Docker shared directory
 - Configuration file: ./compose/data/terraform + ./compose/data/.terraform-data
 ---
 
+### Fake-metrics
+
+We add the Fake-metrics service into the docker compose file: 
+- dockerfile: ./docker/fake-metrics/Dockerfile
+---
 
 
 ### links
@@ -96,7 +122,8 @@ http://127.0.0.1:8881
 http://127.0.0.1:9114
 ### Elasticsearch exporter
 http://127.0.0.1:9114/metrics
-
+### fake-metrics
+http://127.0.0.1:9500/metrics
 
 # start and stop services from docker-compose
 Please see, the file named "99-start-and-stop-services.md" in this directory.
