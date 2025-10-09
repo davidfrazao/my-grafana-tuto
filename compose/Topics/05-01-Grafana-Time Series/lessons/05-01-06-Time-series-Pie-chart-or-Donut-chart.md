@@ -1,4 +1,4 @@
-# Add Elasticsearch + Kibana + Elasticsearch export to this project
+# Create dashboard
 
 
 ## Scruture of the topic 
@@ -21,24 +21,30 @@
 
 ### 🧩 Environment Setup & Verification Checklist
 
-* [ ] copy resources and delete datasources if needed ( contain datasource configuration )
-* [ ] Check the docker-compose.03.03.yaml
+* [ ] copy resource if needed.
+* [ ] Check the docker-compose.05.01.yaml
 * [ ] Start the stack using **Docker Compose** from the **VS Code Docker Extension**.
-* [ ] Check the **Terraform** service — is running.
-* [ ] Access the **Terraform** service — view logs - Vscode extention Vscode.
-* [ ] Attach shell to **Terraform** service and do "curl -fsS http://grafana:3000/api/health && echo" to check Grafana
-* [ ] Create a Elasticsearch datasource by code with Terraform.
-  * [ ] Copy the content from resources
-  * [ ] Attach shell to **Terraform** service 
-        ```
-        terraform plan                 # preview changes
-        terraform apply                # apply (interactive approval)
-        ```
-  * [ ] check dashboard -> [Grafana](http://127.0.0.1:3000) - Datasource
+* [ ] Add -> visualization ( top right coner on the dashboard page - combo box - drop down  )
+* [ ] On the right top coner - choose the visualization: Bar-chat
+  * [ ] Add the promsql: 
+    ```
+    100 - (avg by (instance,mode) (rate(node_cpu_seconds_total{}[5m])) * 100)
+    ```
+  * [ ] Standard options: Unit: Percent (0-100)
+  * [ ] Legend: {{mode}}
+  * [ ] Legend: Visibity: active + Mode:table + Placemenet: Bottom + with: 500 + Values: Min,First,Delta
+  * [ ] Bar chart: Group with: 0.8
+  * [ ] Bar chart: Stacking: Normal
+
+
+* [ ] Panel options - Title: 05-01-05-Time-series-Bar-chart
 
 ---
 
+### Dashboard view
 
+
+<img src="../../../images/05-01-02-Time-series-Stat.png" alt="Architecture" width="750"/>
 
 
 ### Prometheus container
@@ -90,6 +96,11 @@ We add the Terraform service into the docker compose file:
 - Configuration file: ./compose/data/terraform + ./compose/data/.terraform-data
 ---
 
+### Fake-metrics
+
+We add the Fake-metrics service into the docker compose file: 
+- dockerfile: ./docker/fake-metrics/Dockerfile
+---
 
 
 ### links
@@ -109,6 +120,8 @@ http://127.0.0.1:8881
 http://127.0.0.1:9114
 ### Elasticsearch exporter
 http://127.0.0.1:9114/metrics
+### fake-metrics
+http://127.0.0.1:9500/metrics
 
 # start and stop services from docker-compose
 Please see, the file named "99-start-and-stop-services.md" in this directory.

@@ -43,7 +43,7 @@
   * [ ] Parameters from Elasticsearch exporter define in docker compose fil
 ---
 
-Would you like me to format this as a **README section** (with brief explanations under each step)?
+
 
 
 ### Prometheus container

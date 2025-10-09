@@ -1,4 +1,4 @@
-# Add Elasticsearch + Kibana + Elasticsearch export to this project
+# Create dashboard
 
 
 ## Scruture of the topic 
@@ -21,32 +21,24 @@
 
 ### 🧩 Environment Setup & Verification Checklist
 
-* [ ] copy resource.
+* [ ] copy resource if needed.
 * [ ] Check the docker-compose.05.01.yaml
 * [ ] Start the stack using **Docker Compose** from the **VS Code Docker Extension**.
-* [ ] Access the **fake metrics** service — open [http://127.0.0.1:9500/metrics](http://127.0.0.1:9500/metrics) *(Ctrl + Click)*.
-* [ ] Attach shell to **Prometheus** service - (wget -O -  http://fake-metrics:8000/metrics).
-* [ ] add the configuration of the fake metrics to promtheus
-* [ ] go to Grafana - explore - datasoure prometheus - search metrics 
-* [ ] from the directory "python-script" (click on the right button of the mousse + open folder in new windows)
-* [ ] create .venv directory (python virtual env)
-* [ ] delete file ./output/dashboard_from_excel_template.json
-* [ ] update excel file 
-* [ ] Pyhton: select interpreter
-* [ ] run python 
-* [ ] copy ./output/dashboard_from_excel_template.json to ./compose/data/terraform/provisioning/Group_01/dashboard_from_excel_template.json
-* [ ] Check the **Terraform** service — is running.
-* [ ] Access the **Terraform** service — view logs - Vscode extention Vscode.
-* [ ] Attach shell to **Terraform** service
-  * [ ] devolp the dashboard in Grafana with the help of Terraform 
-         ```
-        terraform plan                 # preview changes
-        terraform apply                # apply (interactive approval)
-        ```
+* [ ] Add new New dasbaord ( you can choose the dashboard diretory) + Add visualization
+* [ ] choose the datasource - My-Prometheus
+* [ ] On the right top coner - choose the visualization: Time Serie
+  * [ ] Add the promsql: 100 - (avg by (instance,mode) (rate(node_cpu_seconds_total{}[5m])) * 100)
+  * [ ] Legend: {{instance}}-{{mode}}
+  * [ ] Legend: Visibity: active + Mode:table + Placemenet: right + with: 500 + Values: choose 
+  * [ ] Standard options: Unit: Percent (0-100)
+* [ ] Panel options - Title: 05-01-01-Time-series-Graph
 
 ---
 
-Would you like me to format this as a **README section** (with brief explanations under each step)?
+### Dashboard view
+
+
+<img src="../../../images/05-01-01-Time-series-Graph.png" alt="Architecture" width="750"/>
 
 
 ### Prometheus container
