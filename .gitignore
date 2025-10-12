@@ -111,6 +111,7 @@ MANIFEST
 *.lock.hcl
 .terraform/
 
+
 compose/data/elasticsearch/data/**
 compose/data/prometheus/data/**
 compose/data/grafana/data/**
