@@ -20,7 +20,7 @@
 ## 🧾 Obejctif of the lesson 
 
 ### 🧩 Setup & Verification Checklist
-
+* [ ] Add the Elasticsearch Exporter configuration. 
 * [ ] Start the stack using **Docker Compose** from the **VS Code Docker Extension**.
 * [ ] Access the **Prometheus** service — open [http://127.0.0.1:9090](http://127.0.0.1:9090) *(Ctrl + Click)*.
 * [ ] Access the **Grafana** service — open [http://127.0.0.1:3000](http://127.0.0.1:3000) *(Ctrl + Click)*.

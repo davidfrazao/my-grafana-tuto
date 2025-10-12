@@ -34,8 +34,9 @@
 * [ ] Configure the **Grafana datasource** (`datasource.yaml`) to connect to Prometheus.
 * [ ] View container logs using the **VS Code Docker Extension**.
 * [ ] Explore the container file structure and access files via the **VS Code Docker Extension**.
-* [ ] Test communication between **Prometheus** and **Grafana** (from Prometheus to Grafana).+
+* [ ] Test communication between **Prometheus** and **Grafana** (from Prometheus to Grafana).
 * [ ] Grafana: explore interface - metrics: ( Metrics browser  + command line )
+  * [ ] ./extra/grafana-metrics.md
   * [ ] scrape_duration_seconds.
   * [ ] prometheus*
   * [ ] up ?
