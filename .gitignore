@@ -106,10 +106,11 @@ MANIFEST
 
 # terraform
 ./compose/data/terraforms/.terraform/
+./compose/data/.terraform-data/
 *.tfstate
 *.tfstate.backup
 *.lock.hcl
-.terraform/
+.terraform-data/
 
 
 compose/data/elasticsearch/data/**
