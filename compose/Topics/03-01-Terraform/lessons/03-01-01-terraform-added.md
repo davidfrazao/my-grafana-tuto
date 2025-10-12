@@ -19,7 +19,7 @@
 
 ## 🧾 Obejctif of the lesson 
 
-### 🧩 Environment Setup & Verification Checklist
+### 🧩 Setup & Verification Checklist
 
 * [ ] Start the stack using **Docker Compose** from the **VS Code Docker Extension**.
 * [ ] Check the docker-compose.03.01.yaml

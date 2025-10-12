@@ -19,7 +19,7 @@
 
 ## 🧾 Obejctif of the lesson 
 
-### 🧩 Environment Setup & Verification Checklist
+### 🧩 Setup & Verification Checklist
 
 * [ ] copy resource and and delete dashboard.
 * [ ] Start the stack using **Docker Compose** from the **VS Code Docker Extension**.

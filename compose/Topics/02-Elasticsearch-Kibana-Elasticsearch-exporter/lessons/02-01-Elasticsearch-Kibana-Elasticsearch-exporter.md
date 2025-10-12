@@ -19,7 +19,7 @@
 
 ## 🧾 Obejctif of the lesson 
 
-### 🧩 Environment Setup & Verification Checklist
+### 🧩 Setup & Verification Checklist
 
 * [ ] Start the stack using **Docker Compose** from the **VS Code Docker Extension**.
 * [ ] Access the **Prometheus** service — open [http://127.0.0.1:9090](http://127.0.0.1:9090) *(Ctrl + Click)*.

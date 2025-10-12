@@ -19,25 +19,23 @@
 
 ## 🧾 Obejctif of the lesson 
 
-### 🧩 Environment Setup & Verification Checklist
+### 🧩 Setup & Verification Checklist
 
 * [ ] copy resource if needed.
 * [ ] Check the docker-compose.05.01.yaml
 * [ ] Start the stack using **Docker Compose** from the **VS Code Docker Extension**.
 * [ ] Add -> visualization ( top right coner on the dashboard page - combo box - drop down  )
-* [ ] On the right top coner - choose the visualization: Bar-chat
+* [ ] On the right top coner - choose the visualization: Pie chart
   * [ ] Add the promsql: 
     ```
     100 - (avg by (instance,mode) (rate(node_cpu_seconds_total{}[5m])) * 100)
     ```
-  * [ ] Standard options: Unit: Percent (0-100)
-  * [ ] Legend: {{mode}}
-  * [ ] Legend: Visibity: active + Mode:table + Placemenet: Bottom + with: 500 + Values: Min,First,Delta
-  * [ ] Bar chart: Group with: 0.8
-  * [ ] Bar chart: Stacking: Normal
-
-
-* [ ] Panel options - Title: 05-01-05-Time-series-Bar-chart
+  * [ ] Standard options: Unit: Percent (0-100).
+  * [ ] Legend: {{mode}}.
+  * [ ] Legend: Visibity: active + Mode:table + Placemenet: Bottom + Values: Percent, Value.
+  * [ ] Pie chart: test ( Pie chart type: Pie or Donut).
+  * [ ] Pie chart: Labels: Name, Percent.
+* [ ] Panel options - Title: 05-01-06-Time-series-Pie-Chart
 
 ---
 

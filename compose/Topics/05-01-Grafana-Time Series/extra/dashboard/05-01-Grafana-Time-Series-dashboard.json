@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 0,
+  "id": 17,
   "links": [],
   "panels": [
     {
@@ -181,9 +181,9 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "100 * node_load5\r\n/ on(instance)\r\ncount(count(node_cpu_seconds_total{mode=\"system\"}) by (instance, cpu)) by (instance)",
+          "expr": "100 * node_load5\r\n/ on(instance)\r\ncount(count(node_cpu_seconds_total{}) by (instance, cpu)) by (instance)",
           "hide": false,
-          "legendFormat": "{{instance}}",
+          "legendFormat": "{{instance}}-{{mode}}",
           "range": true,
           "refId": "A"
         }
@@ -371,7 +371,7 @@
               "tooltip": false,
               "viz": false
             },
-            "lineWidth": 2,
+            "lineWidth": 1,
             "scaleDistribution": {
               "type": "linear"
             },
@@ -417,11 +417,11 @@
             "range"
           ],
           "displayMode": "table",
-          "placement": "right",
-          "showLegend": false
+          "placement": "bottom",
+          "showLegend": true
         },
         "orientation": "auto",
-        "showValue": "always",
+        "showValue": "auto",
         "stacking": "normal",
         "text": {},
         "tooltip": {
@@ -430,7 +430,7 @@
           "sort": "none"
         },
         "xTickLabelRotation": 0,
-        "xTickLabelSpacing": 100
+        "xTickLabelSpacing": 0
       },
       "pluginVersion": "12.2.0",
       "targets": [
@@ -680,7 +680,7 @@
   },
   "timepicker": {},
   "timezone": "browser",
-  "title": "05-01-Grafana-Time-Series",
+  "title": "05-01-Grafana-Time-Series-template",
   "uid": "adljhqg",
-  "version": 17
+  "version": 25
 }

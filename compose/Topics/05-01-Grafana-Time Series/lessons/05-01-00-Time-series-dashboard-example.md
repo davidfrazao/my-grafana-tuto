@@ -24,27 +24,23 @@
 * [ ] copy resource if needed.
 * [ ] Check the docker-compose.05.01.yaml
 * [ ] Start the stack using **Docker Compose** from the **VS Code Docker Extension**.
-* [ ] Add -> visualization ( top right coner on the dashboard page - combo box - drop down  )
-* [ ] On the right top coner - choose the visualization: stat
-  * [ ] Add the promsql: 
-    ```
-    100 * node_load5
-    / on(instance)
-    count(count(node_cpu_seconds_total{mode="system"}) by (instance, cpu)) by (instance)
-    ```
-  * [ ] Standard options: Unit: Percent (0-100)
-  * [ ] Standard options: Display name: load per CPU core-(percent)
-  * [ ] tandard options: Color scheme: Calssic palette
-  * [ ] Stat styles: Shoe percent change: active
-  * [ ] Value option: Calculation: Max*
-* [ ] Panel options - Title: 05-01-02-Time-series-Stat
+* [ ] Add new New dasboard ( you can choose the dashboard diretory) + Add visualization.
+* [ ] Choose the datasource - My-Prometheus.
+* [ ] Copy (Contol+V) the JSON code from file "./extra/dashboard/05-01-Grafana-Time-Series.json" 
+* [ ] Click on Back to dashboard.
+* [ ] Click on Setting
+* [ ] Click JSON Model
+* [ ] Paste (Contol+V) the JSON code from file "./extra/dashboard/05-01-Grafana-Time-Series.json"
+* [ ] Save dashboard.
+* [ ] Browser ( edge) - Settings and more (Alt+F) - Split screen.
+
 
 ---
 
 ### Dashboard view
 
 
-<img src="../../../images/05-01-02-Time-series-Stat.png" alt="Architecture" width="750"/>
+<img src="../../../images/Time-series-dashboard-example.png" alt="Architecture" width="750"/>
 
 
 ### Prometheus container

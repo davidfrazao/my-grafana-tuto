@@ -19,7 +19,7 @@
 
 ## 🧾 Obejctif of the lesson 
 
-### 🧩 Environment Setup & Verification Checklist
+### 🧩 Setup & Verification Checklist
 
 * [ ] copy resource if needed.
 * [ ] Check the docker-compose.05.01.yaml

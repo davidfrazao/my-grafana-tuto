@@ -19,7 +19,7 @@
 
 ## 🧾 Obejctif of the lesson 
 
-### 🧩 Environment Setup & Verification Checklist
+### 🧩 Setup & Verification Checklist
 
 * [ ] copy resource if needed.
 * [ ] Check the docker-compose.05.01.yaml
@@ -43,7 +43,7 @@
 ### Dashboard view
 
 
-<img src="../../../images/05-01-02-Time-series-Stat.png" alt="Architecture" width="750"/>
+<img src="../../../images/05-01-03-Time-series-Gauge.png" alt="Architecture" width="750"/>
 
 
 ### Prometheus container

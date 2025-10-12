@@ -19,7 +19,7 @@
 
 ## 🧾 Obejctif of the lesson 
 
-### 🧩 Environment Setup & Verification Checklist
+### 🧩 Setup & Verification Checklist
 
 * [ ] copy resource if needed.
 * [ ] Check the docker-compose.05.01.yaml
@@ -34,7 +34,6 @@
   * [ ] Thresholds: YELLOW = 90 ; RED = 80; BLUE = 70 ; ORANGE = 60
   * [ ] Legend: {{mode}}
   * [ ] Legend: Visibity: active + Mode:table + Placemenet: right + with: 500 + Values: last,First,Max,Min,Median
-
 * [ ] Panel options - Title: 05-01-05-Time-series-Bar-chart
 
 ---
@@ -42,7 +41,7 @@
 ### Dashboard view
 
 
-<img src="../../../images/05-01-02-Time-series-Stat.png" alt="Architecture" width="750"/>
+<img src="../../../images/05-01-05-Time-series-Bar-chart.png" alt="Architecture" width="750"/>
 
 
 ### Prometheus container

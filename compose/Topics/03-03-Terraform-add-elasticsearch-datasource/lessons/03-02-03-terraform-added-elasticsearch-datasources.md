@@ -19,7 +19,7 @@
 
 ## 🧾 Obejctif of the lesson 
 
-### 🧩 Environment Setup & Verification Checklist
+### 🧩 Setup & Verification Checklist
 
 * [ ] copy resources and delete datasources if needed ( contain datasource configuration )
 * [ ] Check the docker-compose.03.03.yaml
