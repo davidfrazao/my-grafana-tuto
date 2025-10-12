@@ -31,3 +31,45 @@ scrape_configs:
     static_configs:
     - targets:
       - localhost:9090
+
+#************************* Scrape: Grafana *********************#
+  - job_name: grafana
+    honor_timestamps: true
+    scrape_interval: 15s
+    scrape_timeout: 10s
+    metrics_path: /metrics
+    scheme: http
+    static_configs:
+    - targets:
+      - grafana:3000
+
+#******************* Scrape: Elasticsearch Exporter ****************#
+  - job_name: elasticsearch_exporter
+    honor_timestamps: true
+    scrape_interval: 15s
+    scrape_timeout: 10s
+    metrics_path: /metrics
+    scheme: http
+    static_configs:
+    - targets:
+      - elasticsearch_exporter:9114
+
+#*********************** Scrape: Fake Metrics *********************#
+  - job_name: fake-metrics
+    honor_timestamps: true
+    scrape_interval: 15s
+    scrape_timeout: 10s
+    metrics_path: /metrics
+    scheme: http
+    static_configs:
+    - targets:
+      - fake-metrics:8000
+#*********************** Scrape: MariaDB *********************#
+  - job_name: 'mysqld-exporter'
+    honor_timestamps: true
+    scrape_interval: 15s
+    scrape_timeout: 10s
+    metrics_path: /metrics
+    scheme: http
+    static_configs:
+      - targets: ['mysqld-exporter:9104']   # <- service name, not localhost

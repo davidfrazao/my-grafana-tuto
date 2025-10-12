@@ -13,7 +13,7 @@ echo
 
 # --- List of directories to copy (contents only) ---
 SOURCE_DIRS=(
-  "compose/Topics/05-01-Grafana-Time Series/resources"
+  "compose/Topics/07-01-Grafana-table-panel-with-elasticsearch/resources"
 )
 
 # --- Destination root ---

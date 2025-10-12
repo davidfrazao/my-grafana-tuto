@@ -13,7 +13,7 @@ echo
 
 # --- List of directories to copy (contents only) ---
 SOURCE_DIRS=(
-  "compose/Topics/03-02-Terraform-add-elasticsearch-datasources/resources"
+  "compose/Topics/04-01-create-fake-linux-metrics-and-script-to-create-dashboard-by-code/resources"
 )
 
 # --- Destination root ---
