@@ -144,3 +144,5 @@ services:
 networks:
   grafana_net:
     driver: bridge
+    external: true
+    name: grafana-net   # must match `docker network ls`

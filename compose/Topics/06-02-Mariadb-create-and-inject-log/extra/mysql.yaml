@@ -1,0 +1,14 @@
+datasources:
+  - name: MariaDB Logs
+    type: mysql
+    access: proxy
+    isDefault: false
+    url: mariadb:3306
+    database: logsim
+    user: grafana
+    secureJsonData:
+      password: grafanaPass   # <- match your root or dedicated logsim user password
+    jsonData:
+      maxOpenConns: 10
+      maxIdleConns: 10
+      connMaxLifetime: 14400

@@ -20,6 +20,13 @@
 ## 🧾 Obejctif of the lesson 
 
 * [ ] Verify the file and directory structure.
+* [ ] Create the docker network 
+   ```DOCKER
+   docker network create \
+    --driver bridge \
+    --subnet 172.26.0.0/16 \
+    grafana-net
+   ```
 * [ ] Start the stack using **Docker Compose** from the **VS Code Extension**.
 * [ ] Access the **Prometheus** service  — open [http://127.0.0.1:9090](http://127.0.0.1:9090) (Ctrl + Click).
 * [ ] Access the  **Grafana** service  — open [http://127.0.0.1:3000](http://127.0.0.1:3000) (Ctrl + Click).

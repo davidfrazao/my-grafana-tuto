@@ -159,6 +159,7 @@ services:
       MARIADB_USER: ${MARIADB_USER:-appuser}
       MARIADB_PASSWORD: ${MARIADB_PASSWORD:-apppass}
       EXPORTER_PASSWORD: ${EXPORTER_PASSWORD:-MetricsPWD}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-StrongPass!}
     ports:
       - "3306:3306"
     volumes:
@@ -189,6 +190,8 @@ services:
   mysqld_exporter:
     image: prom/mysqld-exporter:v0.15.1
     command: ["--config.my-cnf=/etc/.my.cnf"]
+    environment:
+      DATA_SOURCE_NAME: exporter:${EXPORTER_PASSWORD}@(mariadb:3306)/
     volumes:
       - ${PWD}/compose/data/mysqld-exporter/.my.cnf:/etc/.my.cnf:ro
     depends_on:
@@ -200,7 +203,6 @@ services:
       grafana_net:
         aliases:
           - mysqld-exporter   # add this alias    
-
 # fake logs 
   logsim:
     build:
@@ -232,10 +234,13 @@ services:
     restart: unless-stopped
     networks:
       - grafana_net  
+      
 networks:
   grafana_net:
     driver: bridge
-    external: true 
+    external: true
+    name: grafana-net   # must match `docker network ls`
 
 volumes:
   mariadb_data:
+    name : mariadb_data
